@@ -20,6 +20,6 @@ The process is open. Personal information is not.
 
 Nahlam is at the beginning. It is currently one person's proposal.
 
-There is no land, housing, funding, government agreement, or announced partnership. Nobody is being asked for money.
+There is no land, housing, funding, government agreement, or announced partnership. 
 
 The first task is to explain the idea clearly and invite others to examine it before deciding what the movement should become.
