@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nahlam English Typography Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Reem+Kufi:wght@400;700&display=swap">
+  <style>
+    :root {
+      --paper: #f3f0e8;
+      --ink: #18231e;
+      --muted: #617067;
+      --line: #bdc4bb;
+      --green: #225742;
+      --green-soft: #dbe5dd;
+      --font: "Inter", Arial, Helvetica, sans-serif;
+      --font-arabic-logo: "Reem Kufi", sans-serif;
+
+      /* Recommended English scale */
+      --type-caption: 0.75rem;
+      --type-label: 0.8125rem;
+      --type-body: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
+      --type-lead: clamp(1.125rem, 1.05rem + 0.34vw, 1.375rem);
+      --type-subhead: clamp(1.125rem, 1.08rem + 0.22vw, 1.25rem);
+      --type-display: clamp(3.5rem, 2.16rem + 5.95vw, 8rem);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { background: var(--paper); }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button { font: inherit; }
+
+    .study-header {
+      position: sticky;
+      z-index: 10;
+      top: 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      min-height: 76px;
+      padding: 14px clamp(18px, 4vw, 56px);
+      border-bottom: 1px solid var(--ink);
+      background: color-mix(in srgb, var(--paper) 94%, transparent);
+      backdrop-filter: blur(10px);
+    }
+
+    .study-title {
+      margin: 0;
+      font-size: 0.8125rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .study-note {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+
+    .controls button {
+      min-height: 38px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: transparent;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .controls button[aria-pressed="true"] {
+      border-color: var(--green);
+      color: var(--paper);
+      background: var(--green);
+    }
+
+    .study {
+      width: min(calc(100% - 36px), 1380px);
+      margin: 0 auto;
+      padding: 52px 0 88px;
+    }
+
+    .section-kicker {
+      margin: 0 0 10px;
+      color: var(--green);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      max-width: 820px;
+      margin: 0;
+      font-size: clamp(2rem, 1.5rem + 2.2vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .section-intro {
+      max-width: 720px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    .decision {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+      gap: clamp(36px, 7vw, 100px);
+      margin-top: 42px;
+      padding: 30px 0;
+      border-block: 1px solid var(--line);
+    }
+
+    .decision strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    .decision p {
+      max-width: 64ch;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    .weight-key {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .weight-key div {
+      padding: 16px;
+      background: var(--paper);
+    }
+
+    .weight-key b {
+      display: block;
+      font-size: 1.25rem;
+    }
+
+    .weight-key span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    .weight-400 b { font-weight: 400; }
+    .weight-700 b { font-weight: 700; }
+    .weight-800 b { font-weight: 800; }
+
+    .preview-area { margin-top: 64px; }
+
+    .preview-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: flex-end;
+      margin-bottom: 16px;
+    }
+
+    .preview-heading h2 {
+      margin: 0;
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    .preview-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    .frames {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .frame-shell {
+      min-width: 0;
+      border: 1px solid var(--ink);
+      background: var(--paper);
+    }
+
+    .frame-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .site-frame {
+      min-height: 650px;
+      padding: 0 22px;
+      overflow: hidden;
+      container-type: inline-size;
+    }
+
+    .site-header {
+      min-height: 72px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .latin-logo {
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+    }
+
+    .arabic-logo {
+      font-family: var(--font-arabic-logo);
+      font-size: 1.8rem;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .site-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(190px, 0.65fr);
+      gap: clamp(28px, 6cqi, 64px);
+      align-items: center;
+      padding: clamp(52px, 8cqi, 84px) 0;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 24px;
+      color: var(--green);
+      font-family: "Courier New", monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      line-height: 1.3;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 28px;
+      height: 1px;
+      flex: 0 0 auto;
+      background: var(--green);
+      content: "";
+    }
+
+    .sample-display {
+      margin: 0;
+      font-size: clamp(3.5rem, 1.85rem + 7.2cqi, 8rem);
+      font-weight: 800;
+      letter-spacing: -0.045em;
+      line-height: 0.96;
+      text-wrap: balance;
+    }
+
+    .sample-lead {
+      max-width: 61ch;
+      margin: 32px 0 0;
+      font-size: clamp(1.125rem, 1.04rem + 0.38cqi, 1.375rem);
+      font-weight: 400;
+      line-height: 1.55;
+      text-wrap: pretty;
+    }
+
+    .sample-aside {
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px 0 0 22px;
+      border-left: 1px solid var(--ink);
+    }
+
+    .sample-label {
+      margin: 0;
+      color: var(--green);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+
+    .sample-label::before {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      content: "";
+    }
+
+    .sample-body {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.65;
+    }
+
+    .sample-body strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--ink);
+      font-size: 1.125rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .sample-callout {
+      margin-top: 20px;
+      padding: 16px 18px;
+      border-left: 2px solid var(--green);
+      color: var(--green);
+      background: var(--green-soft);
+      font-size: 0.9375rem;
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    .baseline .sample-display {
+      font-size: clamp(3.5rem, 1.7rem + 8.4cqi, 8.5rem);
+      line-height: 0.94;
+    }
+
+    .baseline .sample-lead {
+      font-size: clamp(1.1rem, 1rem + 0.55cqi, 1.4rem);
+    }
+
+    .baseline .sample-body { line-height: 1.7; }
+
+    .standard-table {
+      width: 100%;
+      margin-top: 72px;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    .standard-table caption {
+      margin-bottom: 18px;
+      text-align: left;
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    .standard-table th,
+    .standard-table td {
+      padding: 16px 12px;
+      border-block: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .standard-table th {
+      color: var(--green);
+      font-size: 0.6875rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .standard-table td:first-child { font-weight: 700; }
+    .standard-table code {
+      font-family: "Courier New", monospace;
+      font-size: 0.8125rem;
+    }
+
+    .rules {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin-top: 48px;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+
+    .rule {
+      padding: 22px;
+      background: var(--paper);
+    }
+
+    .rule h3 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .rule p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    body[data-mode="current"] .recommended-shell { display: none; }
+    body[data-mode="current"] .frames { grid-template-columns: 1fr; }
+    body[data-mode="recommended"] .current-shell { display: none; }
+    body[data-mode="recommended"] .frames { grid-template-columns: 1fr; }
+
+    body[data-size="mobile"] .frames {
+      grid-template-columns: repeat(2, minmax(280px, 390px));
+      justify-content: center;
+    }
+
+    body[data-size="mobile"] .site-frame { min-height: 760px; padding-inline: 14px; }
+    body[data-size="mobile"] .site-header { min-height: 64px; }
+    body[data-size="mobile"] .site-main {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: start;
+      padding: 52px 0;
+    }
+    body[data-size="mobile"] .sample-display {
+      font-size: clamp(3.5rem, 13cqi, 5rem);
+    }
+    body[data-size="mobile"] .sample-lead { margin-top: 28px; }
+    body[data-size="mobile"] .sample-aside {
+      min-height: 0;
+      gap: 40px;
+      padding: 22px 0 0;
+      border-top: 1px solid var(--ink);
+      border-left: 0;
+    }
+
+    @media (max-width: 900px) {
+      .study-header { grid-template-columns: 1fr; }
+      .controls { justify-content: flex-start; }
+      .decision { grid-template-columns: 1fr; }
+      .frames { grid-template-columns: 1fr; }
+      .rules { grid-template-columns: 1fr; }
+      .site-main { grid-template-columns: 1fr; }
+      .sample-aside {
+        min-height: 0;
+        gap: 40px;
+        padding: 22px 0 0;
+        border-top: 1px solid var(--ink);
+        border-left: 0;
+      }
+      .standard-table { display: block; overflow-x: auto; }
+    }
+
+    @media (max-width: 620px) {
+      .study { width: min(calc(100% - 24px), 1380px); padding-top: 36px; }
+      .study-header { position: static; padding-inline: 14px; }
+      .weight-key { grid-template-columns: 1fr; }
+      body[data-size="mobile"] .frames { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-mode="compare" data-size="desktop">
+  <header class="study-header">
+    <div>
+      <p class="study-title">Nahlam / English typography study</p>
+      <p class="study-note">Study only. Inter is fixed. No images. No production changes.</p>
+    </div>
+    <div class="controls" aria-label="Study controls">
+      <button type="button" data-mode="current" aria-pressed="false">Current</button>
+      <button type="button" data-mode="recommended" aria-pressed="false">Recommended</button>
+      <button type="button" data-mode="compare" aria-pressed="true">Compare</button>
+      <button type="button" data-size="desktop" aria-pressed="true">Desktop</button>
+      <button type="button" data-size="mobile" aria-pressed="false">Mobile</button>
+    </div>
+  </header>
+
+  <main class="study">
+    <p class="section-kicker">Recommended standard / v1</p>
+    <h1 class="section-title">One family. Three weights. Six clear text roles.</h1>
+    <p class="section-intro">Inter remains the English typeface. The study keeps the current visual character while turning the page’s individual font values into a small, reusable system. Bold is reserved for hierarchy, not general emphasis.</p>
+
+    <section class="decision" aria-label="Typography decision">
+      <div>
+        <strong>The recommendation</strong>
+        <p>Use Inter 400 for reading, 700 for structural emphasis, and 800 only for identity, the main display statement, and short status labels. Use a fluid scale so text grows gradually between mobile and desktop without losing browser zoom support.</p>
+      </div>
+      <div class="weight-key" aria-label="Weight roles">
+        <div class="weight-400"><b>400</b><span>Body and explanations</span></div>
+        <div class="weight-700"><b>700</b><span>Subheads and meaningful emphasis</span></div>
+        <div class="weight-800"><b>800</b><span>Display, identity, short labels</span></div>
+      </div>
+    </section>
+
+    <section class="preview-area" aria-label="Live comparison">
+      <div class="preview-heading">
+        <h2>Rendered comparison</h2>
+        <p>Same text, colors, and structure</p>
+      </div>
+
+      <div class="frames">
+        <article class="frame-shell current-shell baseline">
+          <div class="frame-meta"><span>Current</span><span>Existing individual values</span></div>
+          <div class="site-frame">
+            <div class="site-header">
+              <span class="latin-logo">NAHLAM</span>
+              <span class="arabic-logo" lang="ar" dir="rtl">نحلم</span>
+            </div>
+            <div class="site-main">
+              <section>
+                <p class="eyebrow">An open civic movement in formation</p>
+                <h2 class="sample-display">Let us shape what is rebuilt.</h2>
+                <p class="sample-lead">Nahlam is an early proposal for an open civic movement through which Syrians can help shape how homes and cities are rebuilt.</p>
+              </section>
+              <aside class="sample-aside">
+                <p class="sample-label">In preparation</p>
+                <div>
+                  <p class="sample-body"><strong>Nahlam is still at the beginning.</strong>There is no land, housing, funding, government agreement, or announced partnership.</p>
+                  <p class="sample-callout">Plans, decisions, budgets, contracts, and progress should be documented openly. Personal information should remain private.</p>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </article>
+
+        <article class="frame-shell recommended-shell">
+          <div class="frame-meta"><span>Recommended</span><span>Six-role type system</span></div>
+          <div class="site-frame">
+            <div class="site-header">
+              <span class="latin-logo">NAHLAM</span>
+              <span class="arabic-logo" lang="ar" dir="rtl">نحلم</span>
+            </div>
+            <div class="site-main">
+              <section>
+                <p class="eyebrow">An open civic movement in formation</p>
+                <h2 class="sample-display">Let us shape what is rebuilt.</h2>
+                <p class="sample-lead">Nahlam is an early proposal for an open civic movement through which Syrians can help shape how homes and cities are rebuilt.</p>
+              </section>
+              <aside class="sample-aside">
+                <p class="sample-label">In preparation</p>
+                <div>
+                  <p class="sample-body"><strong>Nahlam is still at the beginning.</strong>There is no land, housing, funding, government agreement, or announced partnership.</p>
+                  <p class="sample-callout">Plans, decisions, budgets, contracts, and progress should be documented openly. Personal information should remain private.</p>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <table class="standard-table">
+      <caption>Proposed English text roles</caption>
+      <thead>
+        <tr><th>Role</th><th>Size</th><th>Weight</th><th>Line height</th><th>Tracking</th><th>Use</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Display</td><td><code>3.5rem → 8rem</code><br>56–128px</td><td>800</td><td>0.96</td><td>−0.045em</td><td>One main statement per page</td></tr>
+        <tr><td>Lead</td><td><code>1.125rem → 1.375rem</code><br>18–22px</td><td>400</td><td>1.55</td><td>Normal</td><td>Opening explanation below the display</td></tr>
+        <tr><td>Subheading</td><td><code>1.125rem → 1.25rem</code><br>18–20px</td><td>700</td><td>1.4</td><td>Normal</td><td>Section titles and meaningful emphasis</td></tr>
+        <tr><td>Body</td><td><code>1rem → 1.125rem</code><br>16–18px</td><td>400</td><td>1.65</td><td>Normal</td><td>Paragraphs and sustained reading</td></tr>
+        <tr><td>Label</td><td><code>0.8125rem</code><br>13px</td><td>700 or 800</td><td>1.25</td><td>+0.08em</td><td>Very short uppercase status labels</td></tr>
+        <tr><td>Caption</td><td><code>0.75rem</code><br>12px</td><td>400 or 700</td><td>1.4</td><td>+0.04em max</td><td>Record numbers, addresses, secondary metadata</td></tr>
+        <tr><td>Wordmark</td><td><code>1rem</code><br>16px</td><td>800</td><td>1</td><td>+0.16em</td><td>NAHLAM identity only</td></tr>
+      </tbody>
+    </table>
+
+    <section class="rules" aria-label="Typography rules">
+      <article class="rule"><h3>What becomes bold</h3><p>The wordmark, the main display statement, short status labels, section titles, and words carrying genuine meaning. Ordinary explanatory sentences remain 400.</p></article>
+      <article class="rule"><h3>What stays regular</h3><p>Introductions, body paragraphs, explanations, and callouts. Color and spacing should distinguish these before adding weight.</p></article>
+      <article class="rule"><h3>Reading width</h3><p>Keep English body text between roughly 45 and 70 characters per line. The lead paragraph is capped at about 61 characters for a calm return sweep.</p></article>
+      <article class="rule"><h3>Uppercase</h3><p>Use uppercase only for short labels and identity. Add tracking there, but never use tracked uppercase for paragraphs or long headings.</p></article>
+      <article class="rule"><h3>Accessibility</h3><p>Body text never drops below 16px. Sizes use rem-based fluid values, allowing browser zoom. Existing ink, green, and muted text colors meet WCAG AA on the paper background.</p></article>
+      <article class="rule"><h3>Restraint</h3><p>Use no more than three obvious emphasis levels in one view. If everything is bold, hierarchy disappears.</p></article>
+    </section>
+  </main>
+
+  <script>
+    const body = document.body;
+    const modeButtons = [...document.querySelectorAll('[data-mode]')].filter(el => el.tagName === 'BUTTON');
+    const sizeButtons = [...document.querySelectorAll('[data-size]')].filter(el => el.tagName === 'BUTTON');
+
+    modeButtons.forEach(button => button.addEventListener('click', () => {
+      body.dataset.mode = button.dataset.mode;
+      modeButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    }));
+
+    sizeButtons.forEach(button => button.addEventListener('click', () => {
+      body.dataset.size = button.dataset.size;
+      sizeButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    }));
+  </script>
+</body>
+</html>
