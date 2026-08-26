@@ -1,3 +1,5 @@
+[العربية](README.ar.md)
+
 # Nahlam
 
 Nahlam is an early proposal for an open civic movement through which Syrians can help shape how homes and cities are rebuilt.
@@ -21,7 +23,5 @@ The process is open. Personal information is not.
 Nahlam is at the beginning. It is currently one person’s proposal.
 
 There is no project, funding, government agreement, or announced partnership.
-
-The first task is to explain the idea clearly and invite others to examine it before deciding what the movement should become.
 
 The first task is to explain the idea clearly and invite others to examine it before deciding what the movement should become.
