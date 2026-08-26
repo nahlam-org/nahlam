@@ -1,7 +1,9 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/nahlam-wordmark-dark.svg">
-  <img src="assets/nahlam-wordmark.svg" alt="نحلم" height="88">
-</picture>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/nahlam-wordmark-dark.svg">
+    <img src="assets/nahlam-wordmark.svg" alt="نحلم" height="88">
+  </picture>
+</p>
 
 [English](README.md)
 
