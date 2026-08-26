@@ -3,15 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f0e8">
   <meta name="description" content="Nahlam is an early proposal for an open civic movement for community-led housing and urban development in Syria.">
-  <meta property="og:title" content="Nahlam | An open civic movement in formation">
-  <meta property="og:description" content="Nahlam is an early proposal for an open civic movement for community-led housing and urban development in Syria.">
-  <meta property="og:type" content="website">
   <title>Nahlam | An open civic movement in formation</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Reem+Kufi:wght@400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Noto+Naskh+Arabic:wght@400;700&family=Reem+Kufi:wght@400&display=swap">
 
   <style>
     :root {
@@ -21,8 +19,8 @@
       --line: #bdc4bb;
       --green: #225742;
       --green-soft: #dbe5dd;
-      --white: #fffdf7;
       --font-latin: "Inter", Arial, Helvetica, sans-serif;
+      --font-arabic: "Noto Naskh Arabic", serif;
       --font-arabic-logo: "Reem Kufi", sans-serif;
       --font-mono: "Courier New", Courier, monospace;
       --type-caption: 0.75rem;
@@ -36,7 +34,10 @@
 
     * { box-sizing: border-box; }
 
-    html { background: var(--paper); }
+    html {
+      background: var(--paper);
+      scrollbar-gutter: stable both-edges;
+    }
 
     body {
       margin: 0;
@@ -45,31 +46,39 @@
       background: var(--paper);
       font-family: var(--font-latin);
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    html[lang="ar"] body {
+      font-family: var(--font-arabic);
+      font-synthesis: none;
     }
 
     button, a { font: inherit; }
 
     ::selection {
-      background: var(--green-soft);
       color: var(--green);
+      background: var(--green-soft);
     }
 
     .page {
       width: min(calc(100% - 40px), 1240px);
       min-height: 100vh;
-      margin: 0 auto;
+      margin-inline: auto;
       display: grid;
       grid-template-rows: auto auto 1fr auto;
     }
 
+    /* Brand placement is physical and identical in both languages. */
     header {
       min-height: 88px;
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
       gap: 24px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--ink);
+      padding-block-end: 10px;
+      border-block-end: 1px solid var(--ink);
+      direction: ltr;
     }
 
     .identity {
@@ -78,32 +87,45 @@
       gap: 14px;
     }
 
-    .wordmark {
+    .language-mark {
+      color: var(--ink);
+      background: transparent;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      opacity: 0.52;
+      text-decoration: none;
+      transition: opacity 140ms ease;
+    }
+
+    .language-mark:hover,
+    .language-mark[aria-current="page"] { opacity: 1; }
+
+    .wordmark-latin {
       display: inline-flex;
       align-items: baseline;
       gap: 12px;
-      color: var(--ink);
+      font-family: var(--font-latin);
       font-size: var(--type-wordmark);
       font-weight: 800;
       letter-spacing: 0.16em;
-      text-decoration: none;
     }
 
-    .wordmark:focus-visible {
-      outline: 2px solid var(--green);
-      outline-offset: 4px;
-    }
-
-    header .arabic {
+    .wordmark-arabic {
       font-family: var(--font-arabic-logo);
       font-size: 2rem;
       font-weight: 400;
       line-height: 1;
     }
 
+    .language-mark:focus-visible {
+      outline: 2px solid var(--green);
+      outline-offset: 4px;
+    }
+
     .record-row {
       display: flex;
-      padding-top: 10px;
+      padding-block-start: 10px;
     }
 
     .record-no {
@@ -114,6 +136,12 @@
       text-transform: uppercase;
     }
 
+    html[lang="ar"] .record-no {
+      font-family: var(--font-arabic);
+      letter-spacing: normal;
+      text-transform: none;
+    }
+
     main {
       display: grid;
       grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
@@ -122,9 +150,7 @@
       padding: clamp(64px, 10vh, 128px) 0;
     }
 
-    .content {
-      max-width: 760px;
-    }
+    .content { max-inline-size: 760px; }
 
     .eyebrow {
       display: flex;
@@ -140,14 +166,22 @@
     }
 
     .eyebrow::before {
-      width: 34px;
-      height: 1px;
+      inline-size: 34px;
+      block-size: 1px;
+      flex: 0 0 auto;
       background: var(--green);
       content: "";
     }
 
+    html[lang="ar"] .eyebrow {
+      font-family: var(--font-arabic);
+      letter-spacing: normal;
+      line-height: 1.65;
+      text-transform: none;
+    }
+
     h1 {
-      max-width: 840px;
+      max-inline-size: 840px;
       margin: 0;
       font-size: var(--type-display);
       font-weight: 800;
@@ -156,27 +190,36 @@
       text-wrap: balance;
     }
 
+    html[lang="ar"] h1 {
+      font-weight: 700;
+      letter-spacing: normal;
+      line-height: 1.08;
+    }
+
     .intro {
-      max-width: 640px;
+      max-inline-size: 640px;
       margin: 40px 0 0;
       font-size: var(--type-lead);
       line-height: 1.55;
       text-wrap: pretty;
     }
 
+    html[lang="ar"] .intro { line-height: 1.7; }
+
     .status-card {
       align-self: stretch;
+      min-block-size: 410px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 410px;
-      padding: 28px 0 0 28px;
-      border-left: 1px solid var(--ink);
+      padding-block-start: 28px;
+      padding-inline-start: 28px;
+      border-inline-start: 1px solid var(--ink);
     }
 
     .status-label {
       display: inline-flex;
-      width: fit-content;
+      inline-size: fit-content;
       align-items: center;
       gap: 9px;
       margin: 0;
@@ -188,11 +231,18 @@
     }
 
     .status-label::before {
-      width: 9px;
-      height: 9px;
+      inline-size: 9px;
+      block-size: 9px;
+      flex: 0 0 auto;
       border-radius: 50%;
       background: var(--green);
       content: "";
+    }
+
+    html[lang="ar"] .status-label {
+      letter-spacing: normal;
+      line-height: 1.65;
+      text-transform: none;
     }
 
     .status-copy {
@@ -205,22 +255,27 @@
 
     .status-copy strong {
       display: block;
-      margin-bottom: 12px;
+      margin-block-end: 12px;
       color: var(--ink);
       font-size: var(--type-subhead);
       font-weight: 700;
     }
 
+    html[lang="ar"] .status-copy { line-height: 1.75; }
+
     .principle {
-      margin-top: 24px;
+      margin-block-start: 24px;
       padding: 18px 20px;
       color: var(--green);
       background: var(--green-soft);
-      border-left: 2px solid var(--green);
+      border-inline-start: 2px solid var(--green);
       font-size: 0.9375rem;
       line-height: 1.6;
     }
 
+    html[lang="ar"] .principle { line-height: 1.75; }
+
+    /* Footer placement remains physical, as requested: links left, phrase right. */
     footer {
       min-height: 72px;
       display: flex;
@@ -228,26 +283,18 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px 24px;
-      border-top: 1px solid var(--line);
+      border-block-start: 1px solid var(--line);
       color: var(--muted);
+      direction: ltr;
+    }
+
+    .footer-addresses,
+    .footer-statement {
       font-family: var(--font-mono);
       font-size: var(--type-caption);
       letter-spacing: 0.06em;
+      line-height: 1.5;
       text-transform: uppercase;
-    }
-
-    footer a {
-      color: inherit;
-      text-decoration-color: rgba(34, 87, 66, 0.45);
-      text-underline-offset: 3px;
-      transition: color 140ms ease;
-    }
-
-    footer a:hover { color: var(--green); }
-
-    footer a:focus-visible {
-      outline: 2px solid var(--green);
-      outline-offset: 3px;
     }
 
     .footer-addresses {
@@ -256,24 +303,43 @@
       gap: 18px;
     }
 
+    .footer-addresses a {
+      color: inherit;
+      text-decoration-color: rgba(34, 87, 66, 0.45);
+      text-underline-offset: 3px;
+    }
+
+    .footer-statement { text-align: end; }
+
+    html[lang="ar"] .footer-statement {
+      font-family: var(--font-arabic);
+      letter-spacing: normal;
+      direction: rtl;
+      text-transform: none;
+    }
+
     @media (max-width: 800px) {
       .page { width: min(calc(100% - 28px), 680px); }
       header { min-height: 76px; }
       .record-row { display: none; }
+
       main {
         grid-template-columns: 1fr;
         gap: 54px;
         align-items: start;
         padding: 64px 0 56px;
       }
+
       h1 { font-size: clamp(3.5rem, 13vw, 5rem); }
-      .intro { margin-top: 32px; }
+      .intro { margin-block-start: 32px; }
+
       .status-card {
-        min-height: 0;
+        min-block-size: 0;
         gap: 48px;
-        padding: 24px 0 0;
-        border-top: 1px solid var(--ink);
-        border-left: 0;
+        padding-block-start: 24px;
+        padding-inline-start: 0;
+        border-inline-start: 0;
+        border-block-start: 1px solid var(--ink);
       }
 
       footer {
@@ -285,50 +351,105 @@
       }
     }
 
-    @media (prefers-reduced-motion: no-preference) {
-      .content, .status-card {
-        animation: enter 520ms ease-out both;
-      }
-      .status-card { animation-delay: 100ms; }
-      @keyframes enter {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <header>
+    <header aria-label="Nahlam language navigation">
       <div class="identity">
-        <a class="wordmark" href="/" aria-label="Nahlam home">NAHLAM</a>
+        <button class="language-mark wordmark-latin" type="button" data-language="en" aria-label="Show the English version" aria-current="page">NAHLAM</button>
       </div>
-      <span class="arabic" lang="ar" dir="rtl">نحلم</span>
+      <button class="language-mark wordmark-arabic" type="button" data-language="ar" lang="ar" dir="rtl" aria-label="عرض النسخة العربية" aria-current="false">نحلم</button>
     </header>
 
-    <div class="record-row"><span class="record-no">Founding record / 0001</span></div>
+    <div class="record-row"><span class="record-no" data-copy="record">Founding record / 0001</span></div>
 
     <main>
       <section class="content">
-        <p class="eyebrow">An open civic movement in formation</p>
-        <h1>Let us shape what is rebuilt.</h1>
-        <p class="intro">Nahlam is an early proposal for an open civic movement through which Syrians can help shape how homes and cities are rebuilt.</p>
+        <p class="eyebrow" data-copy="eyebrow">An open civic movement in formation</p>
+        <h1 data-copy="title">Let us shape what is rebuilt.</h1>
+        <p class="intro" data-copy="intro">Nahlam is an early proposal for an open civic movement through which Syrians can help shape how homes and cities are rebuilt.</p>
       </section>
 
       <aside class="status-card">
-        <p class="status-label">In preparation</p>
-
+        <p class="status-label" data-copy="statusLabel">In preparation</p>
         <div>
-          <p class="status-copy"><strong>Nahlam is still at the beginning.</strong> There is no land, housing, funding, government agreement, or announced partnership.</p>
-          <p class="principle">Plans, decisions, budgets, contracts, and progress should be documented openly. Personal information should remain private.</p>
+          <p class="status-copy"><strong data-copy="statusHeading">Nahlam is still at the beginning.</strong><span data-copy="statusBody">There is no land, housing, funding, government agreement, or announced partnership.</span></p>
+          <p class="principle" data-copy="principle">Plans, decisions, budgets, contracts, and progress should be documented openly. Personal information should remain private.</p>
         </div>
       </aside>
     </main>
 
     <footer>
       <span class="footer-addresses"><span>nahlam.org</span><a href="https://github.com/nahlam-org/nahlam" target="_blank" rel="noreferrer">GitHub</a></span>
-      <span>A proposal open for examination</span>
+      <span class="footer-statement" data-copy="footer">A proposal open for examination</span>
     </footer>
   </div>
+
+  <script>
+    const copy = {
+      en: {
+        pageTitle: 'Nahlam | An open civic movement in formation',
+        navigationLabel: 'Nahlam language navigation',
+        record: 'Founding record / 0001',
+        eyebrow: 'An open civic movement in formation',
+        title: 'Let us shape what is rebuilt.',
+        intro: 'Nahlam is an early proposal for an open civic movement through which Syrians can help shape how homes and cities are rebuilt.',
+        statusLabel: 'In preparation',
+        statusHeading: 'Nahlam is still at the beginning.',
+        statusBody: 'There is no land, housing, funding, government agreement, or announced partnership.',
+        principle: 'Plans, decisions, budgets, contracts, and progress should be documented openly. Personal information should remain private.',
+        footer: 'A proposal open for examination'
+      },
+      ar: {
+        pageTitle: 'نحلم | حركة مدنية مفتوحة المصدر، قيد التأسيس',
+        navigationLabel: 'التنقل بين نسختي نحلم العربية والإنجليزية',
+        record: 'السجل التأسيسي / 0001',
+        eyebrow: 'حركة مدنية مفتوحة المصدر، قيد التأسيس',
+        title: 'لنرسم معًا ملامح ما سيُعاد بناؤه.',
+        intro: '«نحلم» فكرة في طور التأسيس لحركة مدنية مفتوحة المصدر، تتيح للسوريين أن يكون لهم دور في رسم ملامح إعادة بناء بيوتهم ومدنهم.',
+        statusLabel: 'قيد الإعداد',
+        statusHeading: 'ما زالت «نحلم» في خطوتها الأولى.',
+        statusBody: 'لا توجد حتى الآن أرض مخصصة للمشروع، ولا مساكن، ولا تمويل، ولا اتفاق حكومي، ولا شراكة معلنة.',
+        principle: 'يجب أن تكون الخطط والقرارات والميزانيات والعقود ومراحل التقدم موثقة ومتاحة للجميع. أما المعلومات الشخصية فتبقى خاصة.',
+        footer: 'مقترح مفتوح للنقاش والمراجعة'
+      }
+    };
+
+    function setLanguage(language, updateHash = true) {
+      const selected = copy[language] ? language : 'en';
+      const root = document.documentElement;
+      root.lang = selected;
+      root.dir = selected === 'ar' ? 'rtl' : 'ltr';
+      document.title = copy[selected].pageTitle;
+      document.querySelector('header').setAttribute('aria-label', copy[selected].navigationLabel);
+
+      document.querySelectorAll('[data-copy]').forEach(element => {
+        element.textContent = copy[selected][element.dataset.copy];
+      });
+
+      document.querySelectorAll('[data-language]').forEach(button => {
+        const active = button.dataset.language === selected;
+        button.setAttribute('aria-current', active ? 'page' : 'false');
+      });
+
+      const expectedHash = `#${selected}`;
+      if (updateHash || location.hash !== expectedHash) history.replaceState(null, '', expectedHash);
+    }
+
+    document.querySelectorAll('[data-language]').forEach(button => {
+      button.addEventListener('click', () => setLanguage(button.dataset.language));
+    });
+
+    window.addEventListener('hashchange', () => setLanguage(location.hash.slice(1), false));
+    setLanguage(location.hash.slice(1) || 'en', false);
+  </script>
 </body>
 </html>
