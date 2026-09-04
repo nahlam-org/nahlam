@@ -1,0 +1,165 @@
+/* Shared stylesheet for the legal pages (Impressum, Datenschutz).
+   Same tokens and fonts as index.html. Fonts are served from this site only. */
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("fonts/inter-latin-var.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Reem Kufi";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/reem-kufi-arabic-var.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFC;
+}
+
+:root {
+  --paper: #f3f0e8;
+  --ink: #18231e;
+  --muted: #617067;
+  --line: #bdc4bb;
+  --green: #225742;
+  --green-soft: #dbe5dd;
+  --font-latin: "Inter", Arial, Helvetica, sans-serif;
+  --font-arabic-logo: "Reem Kufi", sans-serif;
+  --font-mono: "Courier New", Courier, monospace;
+  --type-caption: 0.75rem;
+  --type-body: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--paper); scrollbar-gutter: stable both-edges; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--font-latin);
+  font-size: var(--type-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--green); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+
+.page {
+  width: min(calc(100% - 40px), 1240px);
+  min-height: 100vh;
+  margin-inline: auto;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+}
+
+header {
+  min-height: 88px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block-end: 10px;
+  border-block-end: 1px solid var(--ink);
+  direction: ltr;
+}
+
+.wordmark-latin {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.wordmark-arabic {
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--font-arabic-logo);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.record-row { display: flex; padding-block-start: 10px; }
+
+.record-no {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--type-caption);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+main { padding: clamp(48px, 8vh, 96px) 0; }
+
+.legal { max-inline-size: 68ch; }
+
+.legal h1 {
+  margin: 0 0 32px;
+  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.legal h2 {
+  margin: 40px 0 10px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.legal p { margin: 0 0 14px; }
+.legal address { font-style: normal; margin: 0 0 14px; }
+
+.language-note {
+  margin: 64px 0 24px;
+  padding-block-start: 24px;
+  border-block-start: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--type-caption);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Placeholders the founder still has to fill. Remove the class once filled. */
+.todo {
+  padding: 0 4px;
+  color: var(--green);
+  background: var(--green-soft);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+footer {
+  min-height: 72px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  border-block-start: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--type-caption);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  direction: ltr;
+}
+
+.footer-addresses { display: flex; align-items: center; gap: 18px; }
+.footer-addresses a { color: inherit; text-decoration-color: rgba(34, 87, 66, 0.45); }
+
+@media (max-width: 800px) {
+  .page { width: min(calc(100% - 28px), 680px); }
+  header { min-height: 76px; }
+  main { padding: 40px 0 48px; }
+  footer { flex-direction: column; align-items: flex-start; justify-content: center; gap: 6px; }
+}
